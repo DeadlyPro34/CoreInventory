@@ -13,11 +13,35 @@ function triggerToast(message) {
     }, 3000);
 }
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = document.getElementById('loc_name').value;
-    triggerToast(`Location "${name}" saved successfully!`);
-    form.reset();
+    
+    // For simplicity, we'll try to get the first warehouse or create one
+    let warehouseId = 1; 
+
+    const locationData = {
+        name: name,
+        warehouse: warehouseId
+    };
+
+    try {
+        const response = await fetch('/api/locations/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(locationData)
+        });
+
+        if (response.ok) {
+            triggerToast(`Location "${name}" saved successfully!`);
+            form.reset();
+        } else {
+            triggerToast("Error saving location. Make sure a warehouse exists.");
+        }
+    } catch (error) {
+        console.error('Error saving location:', error);
+        triggerToast("Error saving location.");
+    }
 });
 
 document.getElementById('updateBtn').addEventListener('click', () => {

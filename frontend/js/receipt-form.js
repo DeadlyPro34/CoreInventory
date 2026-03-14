@@ -1,24 +1,47 @@
-const validateBtn = document.getElementById('validateBtn');
 if (validateBtn) {
-    validateBtn.addEventListener('click', () => {
+    validateBtn.addEventListener('click', async () => {
         const btn = document.getElementById('validateBtn');
+        const originalText = btn.innerHTML;
+        
         btn.innerHTML = 'PROCESSING...';
         btn.disabled = true;
 
-        setTimeout(() => {
-            const toast = document.getElementById('toast');
-            document.getElementById('toastMsg').textContent = "Receipt WH/IN/0001 validated successfully.";
-            toast.style.opacity = '1';
-            toast.style.transform = 'translateY(0) translateX(-50%)';
+        const receiptData = {
+            reference: 'WH/IN/' + Date.now(), // Generate a unique reference
+            move_type: 'receipt',
+            source: 'Vendors',
+            destination: 'WH/Stock1',
+            partner: 'Azure Interior', // Use mockup data for now or grab from inputs if available
+            schedule_date: new Date().toISOString(),
+            status: 'done'
+        };
 
+        try {
+            const response = await fetch('/api/moves/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(receiptData)
+            });
+
+            if (response.ok) {
+                const toast = document.getElementById('toast');
+                document.getElementById('toastMsg').textContent = `Receipt ${receiptData.reference} validated successfully.`;
+                toast.style.opacity = '1';
+                toast.style.transform = 'translateY(0) translateX(-50%)';
+
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateY(40px) translateX(-50%)';
+                }, 3000);
+            } else {
+                console.error('Error validating receipt');
+            }
+        } catch (error) {
+            console.error('Error validating receipt:', error);
+        } finally {
             btn.innerHTML = 'VALIDATE';
             btn.disabled = false;
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateY(40px) translateX(-50%)';
-            }, 3000);
-        }, 1000);
+        }
     });
 }
 

@@ -71,10 +71,20 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
     setLoading(e.target, true);
 
     const username = document.getElementById('login_user').value;
-    const pass = document.getElementById('password').value;
+    const password = document.getElementById('password').value;
 
-    setTimeout(() => {
-        if (username === "admin" && pass === "password") {
+    try {
+        const response = await fetch('/api/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
             if (window.smoothNavigate) {
                 window.smoothNavigate('dashboard.html');
             } else {
@@ -83,28 +93,52 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
                 setTimeout(() => window.location.href = 'dashboard.html', 600);
             }
         } else {
-            showAlert("Invalid username or password.");
+            showAlert(data.message || "Invalid username or password.");
             setLoading(e.target, false);
         }
-    }, 1000);
+    } catch (error) {
+        showAlert("An error occurred during login. Please try again.");
+        setLoading(e.target, false);
+    }
 });
 
 document.getElementById('signupForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     hideAlert();
 
-    const pass = document.getElementById('signup_pass').value;
+    const username = document.getElementById('signup_user').value;
+    const email = document.getElementById('signup_email').value;
+    const password = document.getElementById('signup_pass').value;
     const confirm = document.getElementById('signup_pass_confirm').value;
 
-    if (pass !== confirm) {
+    if (password !== confirm) {
         showAlert("Passwords do not match.");
         return;
     }
 
     setLoading(e.target, true);
-    setTimeout(() => {
+
+    try {
+        const response = await fetch('/api/signup/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            setLoading(e.target, false);
+            toggleView('login');
+            showAlert("Account created successfully! Please login.", 'success');
+        } else {
+            showAlert(data.message || "Account creation failed.");
+            setLoading(e.target, false);
+        }
+    } catch (error) {
+        showAlert("An error occurred during signup. Please try again.");
         setLoading(e.target, false);
-        toggleView('login');
-        showAlert("Account created successfully! Please login.", 'success');
-    }, 1200);
+    }
 });
