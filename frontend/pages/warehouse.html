@@ -5,92 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoreInventory | Warehouse Details</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/tailwind.config.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #4F46E5;
-            --secondary: #C4B5FD;
-            --dark-indigo: #312E81;
-            --bg-lavender: #F5F3FF;
-            --text-gray: #374151;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-lavender);
-            color: var(--text-gray);
-        }
-
-        /* Glassmorphism Navigation */
-        .glass-nav {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(79, 70, 229, 0.1);
-        }
-
-        /* Input Animations */
-        .form-input {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1.5px solid #E2E8F0;
-        }
-
-        .form-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
-            outline: none;
-            transform: translateY(-1px);
-        }
-
-        /* Card Hover */
-        .warehouse-card {
-            transition: all 0.4s ease;
-        }
-        .warehouse-card:hover {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-        }
-
-        /* Button Glow */
-        .btn-glow:hover {
-            box-shadow: 0 0 15px rgba(79, 70, 229, 0.4);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate-fade-in {
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/warehouse.css">
 </head>
-<body class="min-h-screen">
+<body class="bg-theme-light text-theme-gray font-sans antialiased min-h-screen selection:bg-theme-light selection:text-theme-dark">
 
-    <!-- Navigation Bar (Consistent with Products) -->
-    <nav class="glass-nav sticky top-0 z-50 px-6 py-3">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-8">
-                <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 bg-[#4F46E5] rounded-lg flex items-center justify-center text-white shadow-lg">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+    <!-- Navigation Bar -->
+    <nav class="glass-panel sticky top-0 z-50 w-full mb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo & Main Nav -->
+                <div class="flex items-center gap-8">
+                    <div class="flex-shrink-0 cursor-pointer text-theme-dark flex items-center gap-2">
+                        <i data-lucide="boxes" class="text-theme-primary w-6 h-6"></i>
+                        <span class="font-bold text-xl tracking-tight">CoreInventory</span>
                     </div>
-                    <span class="font-bold text-xl tracking-tight text-[#312E81]">CoreInventory</span>
+                    
+                    <div class="hidden md:flex items-center space-x-2">
+                        <a href="../dashboard.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
+                            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
+                        </a>
+                        <!-- Operations Dropdown -->
+                        <div class="relative dropdown-container">
+                            <button class="dropdown-trigger flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
+                                <i data-lucide="arrow-right-left" class="w-4 h-4"></i> Operations
+                                <i data-lucide="chevron-down" class="w-3 h-3 ml-1 opacity-70 transition-transform duration-200"></i>
+                            </button>
+                            <div class="dropdown-content absolute left-0 mt-1 w-48 rounded-md shadow-lg bg-theme-white ring-1 ring-theme-secondary z-50 overflow-hidden">
+                                <div class="py-1">
+                                    <a href="receipts.html" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="download" class="w-4 h-4 inline mr-2 text-theme-primary"></i> Receipts</a>
+                                    <a href="deliveries.html" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="upload" class="w-4 h-4 inline mr-2 text-theme-dark"></i> Delivery</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="sliders-horizontal" class="w-4 h-4 inline mr-2 text-theme-gray"></i> Adjustment</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="products.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
+                            <i data-lucide="package" class="w-4 h-4"></i> Products
+                        </a>
+                        <a href="history.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
+                            <i data-lucide="history" class="w-4 h-4"></i> Move History
+                        </a>
+                        <!-- Settings Dropdown -->
+                        <div class="relative dropdown-container">
+                            <button class="dropdown-trigger flex items-center gap-2 px-3 py-2 rounded-md text-sm font-bold text-theme-primary bg-theme-light transition-colors">
+                                <i data-lucide="settings" class="w-4 h-4"></i> Settings
+                                <i data-lucide="chevron-down" class="w-3 h-3 ml-1 opacity-70 transition-transform duration-200"></i>
+                            </button>
+                            <div class="dropdown-content absolute left-0 mt-1 w-56 rounded-md shadow-lg bg-theme-white ring-1 ring-theme-secondary z-50 overflow-hidden">
+                                <div class="px-4 py-2 border-b border-theme-secondary text-xs uppercase tracking-wider text-theme-dark font-bold bg-theme-light/50">Infrastructure</div>
+                                <div class="py-1">
+                                    <a href="warehouse.html" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="warehouse" class="w-4 h-4 inline mr-2 text-theme-gray"></i> Warehouse</a>
+                                    <a href="locations.html" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="map-pin" class="w-4 h-4 inline mr-2 text-theme-gray"></i> Locations</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                
-                <div class="hidden md:flex items-center gap-1">
-                    <a href="#" class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-[#4F46E5] transition-colors">Dashboard</a>
-                    <a href="#" class="px-4 py-2 text-sm font-bold text-[#4F46E5] bg-indigo-50 rounded-lg">Operations</a>
-                    <a href="products.html" class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-[#4F46E5] transition-colors">Products</a>
-                    <a href="#" class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-[#4F46E5] transition-colors">Move History</a>
-                    <a href="#" class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-[#4F46E5] transition-colors">Settings</a>
-                </div>
-            </div>
 
-            <div class="flex items-center gap-4">
-                <button class="p-2 text-slate-400 hover:text-[#4F46E5] relative">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v1m6 0H9"></path></svg>
-                </button>
-                <div class="w-9 h-9 bg-[#C4B5FD] rounded-full border-2 border-white shadow-sm cursor-pointer hover:opacity-80 transition-opacity"></div>
+                <!-- User Profile -->
+                <div class="flex items-center gap-4">
+                    <button class="text-theme-gray hover:text-theme-primary transition-colors">
+                        <i data-lucide="bell" class="w-5 h-5"></i>
+                    </button>
+                    <div class="w-8 h-8 rounded-full bg-theme-primary flex items-center justify-center font-bold text-sm text-theme-white shadow-md cursor-pointer ring-2 ring-theme-secondary hover:bg-theme-dark transition-colors">
+                        A
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -187,51 +170,6 @@
         </div>
     </main>
 
-    <script>
-        const warehouseForm = document.getElementById('warehouseForm');
-        const toast = document.getElementById('toast');
-        const toastMsg = document.getElementById('toastMsg');
-
-        function showNotification(message, isSuccess = true) {
-            toastMsg.textContent = message;
-            toast.style.opacity = '1';
-            toast.style.transform = 'translateY(0) translateX(-50%)';
-            
-            // Adjust background if it were an error (optional)
-            if (!isSuccess) {
-                toast.classList.replace('bg-slate-900', 'bg-red-600');
-            } else {
-                toast.classList.replace('bg-red-600', 'bg-slate-900');
-            }
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateY(40px) translateX(-50%)';
-            }, 3000);
-        }
-
-        warehouseForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Basic Form Validation (HTML5 handles required, but let's add visual feedback)
-            const saveBtn = document.getElementById('saveBtn');
-            const originalText = saveBtn.innerHTML;
-            
-            saveBtn.disabled = true;
-            saveBtn.innerHTML = `<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Saving...`;
-
-            // Simulate API Call
-            setTimeout(() => {
-                showNotification("Warehouse details updated successfully!");
-                saveBtn.disabled = false;
-                saveBtn.innerHTML = originalText;
-            }, 1200);
-        });
-
-        document.getElementById('updateBtn').addEventListener('click', () => {
-             // Example of alternative trigger
-             showNotification("System is syncing latest warehouse data...", true);
-        });
-    </script>
+    <script src="../js/warehouse.js"></script>
 </body>
 </html>
