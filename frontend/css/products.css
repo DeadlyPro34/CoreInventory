@@ -1,0 +1,39 @@
+/* Table Row Hover & Animation */
+.table-row {
+    transition: all 0.2s ease;
+}
+.table-row:hover {
+    background-color: var(--tw-colors-theme-white, #FFFFFF);
+    transform: scale(1.002);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Floating Action Button Pulse */
+@keyframes pulse-custom {
+    0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(79, 70, 229, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+}
+.fab-pulse {
+    animation: pulse-custom 2s infinite;
+}
+
+/* Custom Input Focus */
+.search-focus:focus {
+    box-shadow: 0 0 0 4px rgba(196, 181, 253, 0.3);
+    border-color: #4F46E5;
+}
+
+/* Status Badges */
+.badge-pill {
+    padding: 2px 10px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* Modal Blur */
+.modal-overlay {
+    background: rgba(49, 46, 129, 0.4);
+    backdrop-filter: blur(4px);
+}
