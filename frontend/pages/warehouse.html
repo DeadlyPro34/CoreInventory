@@ -124,12 +124,22 @@
     </div>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-6 py-12 animate-fade-in">
+    <main class="flex-grow max-w-4xl mx-auto px-6 py-12 animate-fade-in">
         
         <!-- Page Header -->
-        <div class="mb-10 text-center">
-            <h1 class="text-3xl font-bold text-[#312E81]">Warehouse Details</h1>
-            <p class="text-slate-500 mt-2">Configure and manage your primary storage locations.</p>
+        <div class="mb-10 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center text-[#4F46E5]">
+                    <i data-lucide="warehouse" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-bold text-[#312E81]">Warehouse Setup</h1>
+                    <p class="text-slate-500 text-sm">Configure and manage your primary storage locations.</p>
+                </div>
+            </div>
+            <button onclick="document.getElementById('warehouseForm').reset()" class="px-6 py-2.5 bg-[#4F46E5] hover:bg-[#312E81] text-white rounded-xl font-bold transition-all shadow-lg flex items-center gap-2">
+                <i data-lucide="plus" class="w-5 h-5"></i> NEW
+            </button>
         </div>
 
         <!-- Warehouse Form Card -->
@@ -219,7 +229,7 @@
     <footer class="footer mt-auto">
         <div class="footer-content">
             <div class="footer-text">
-                &copy; 2026 CoreInventory. All rights reserved.
+                &copy; 2024 CoreInventory. All rights reserved.
             </div>
             <div class="footer-links">
                 <a href="#" class="footer-link">Documentation</a>

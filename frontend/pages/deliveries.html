@@ -14,7 +14,7 @@
 </head>
 
 <body
-    class="bg-theme-light text-theme-gray font-sans antialiased min-h-screen pb-20 selection:bg-theme-light selection:text-theme-dark">
+    class="bg-theme-light text-theme-gray font-sans antialiased min-h-screen flex flex-col selection:bg-theme-light selection:text-theme-dark">
 
     <!-- Navigation Bar -->
     <nav class="glass-panel sticky top-0 z-50 w-full mb-6">
@@ -145,6 +145,7 @@
         </div>
     </div>
 
+    <main class="flex-grow">
     <!-- Header Actions Section -->
     <header class="max-w-7xl mx-auto px-6 pt-10 pb-6 animate-fade">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -154,7 +155,7 @@
             </div>
 
             <div class="flex items-center gap-3">
-                <button onclick="toggleModal(true)"
+                <button onclick="smoothNavigate('delivery-form.html')"
                     class="px-6 py-2.5 bg-[#4F46E5] hover:bg-[#312E81] text-white rounded-xl font-bold transition-all shadow-lg flex items-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4">
@@ -358,6 +359,7 @@
             </div>
         </div>
     </div>
+    </main>
 
     <!-- Toast Notification -->
     <div id="toast"
@@ -369,6 +371,20 @@
         </div>
         <span id="toastMsg">Order created successfully!</span>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto">
+        <div class="footer-content">
+            <div class="footer-text">
+                &copy; 2024 CoreInventory. All rights reserved.
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Documentation</a>
+                <a href="#" class="footer-link">Support</a>
+                <a href="#" class="footer-link">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
 
     <script src="../js/transitions.js"></script>
     <script src="../js/deliveries.js"></script>

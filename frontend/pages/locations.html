@@ -145,21 +145,21 @@
     </div>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-6 py-12">
+    <main class="flex-grow max-w-4xl mx-auto px-6 py-12">
 
-        <div class="mb-10 flex items-center gap-4 animate-slide-in">
-            <div class="p-3 bg-white rounded-2xl shadow-sm border border-slate-100 text-[#4F46E5]">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                </svg>
+        <div class="mb-10 flex items-center justify-between animate-slide-in">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-white rounded-2xl shadow-sm border border-theme-secondary flex items-center justify-center text-theme-primary">
+                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-theme-dark">Location Setup</h2>
+                    <p class="text-xs font-medium text-theme-gray uppercase tracking-widest">Storage Hierarchy</p>
+                </div>
             </div>
-            <div>
-                <h1 class="text-3xl font-bold text-[#312E81]">Locations</h1>
-                <p class="text-slate-500 text-sm">Define specific aisles, shelves, or zones within your warehouses.</p>
-            </div>
+            <button onclick="document.getElementById('locationForm').reset()" class="px-6 py-2.5 bg-[#4F46E5] hover:bg-[#312E81] text-white rounded-xl font-bold transition-all shadow-lg flex items-center gap-2">
+                <i data-lucide="plus" class="w-5 h-5"></i> NEW
+            </button>
         </div>
 
         <!-- Location Card Form -->
@@ -237,6 +237,20 @@
             <span id="toastMsg">Location configured!</span>
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto">
+        <div class="footer-content">
+            <div class="footer-text">
+                &copy; 2024 CoreInventory. All rights reserved.
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Documentation</a>
+                <a href="#" class="footer-link">Support</a>
+                <a href="#" class="footer-link">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
 
     <script src="../js/transitions.js"></script>
     <script src="../js/locations.js"></script>

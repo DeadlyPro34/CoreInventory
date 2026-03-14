@@ -122,6 +122,59 @@ function setupMobileMenu() {
     if (overlay) overlay.addEventListener('click', () => toggleMobileMenu(false));
 }
 
+// Add Product Logic
+const addProductForm = document.getElementById('addProductForm');
+if (addProductForm) {
+    addProductForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('prodName').value;
+        const cost = document.getElementById('prodCost').value;
+        const stock = document.getElementById('prodStock').value;
+        const categoryIcon = document.getElementById('prodCategory').value;
+
+        const tbody = document.querySelector('#stockTable tbody');
+        const newRow = document.createElement('tr');
+        newRow.className = 'table-row group';
+        newRow.innerHTML = `
+            <td class="px-6 py-5">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-theme-light rounded-lg flex items-center justify-center text-theme-primary">
+                        <i data-lucide="${categoryIcon}" class="w-5 h-5"></i>
+                    </div>
+                    <span class="font-bold text-theme-dark">${name}</span>
+                </div>
+            </td>
+            <td class="px-6 py-5 text-theme-gray font-medium">${Number(cost).toLocaleString()} Rs</td>
+            <td class="px-6 py-5 text-center">
+                <input type="number" value="${stock}"
+                    class="w-16 text-center py-1 rounded bg-theme-light border border-theme-secondary focus:border-theme-primary outline-none text-sm font-medium">
+            </td>
+            <td class="px-6 py-5 text-center">
+                <span class="badge-pill bg-green-100 text-green-700">${stock} Units</span>
+            </td>
+            <td class="px-6 py-5 text-right">
+                <button class="px-4 py-1.5 text-xs font-bold text-theme-white bg-theme-primary rounded-lg hover:bg-theme-dark transition-all shadow-sm">Update</button>
+            </td>
+        `;
+
+        tbody.appendChild(newRow);
+        
+        // Re-init icons for the new row
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        // Attach event listener to new button
+        newRow.querySelector('button').addEventListener('click', () => showToast('Stock updated successfully!'));
+
+        // Reset and close
+        addProductForm.reset();
+        toggleModal(false);
+        showToast('New product added!');
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     setupDropdowns();
     setupMobileMenu();
