@@ -1,42 +1,24 @@
-// View Switching Logic
-function switchView(view) {
-    const listView = document.getElementById('listView');
-    const kanbanView = document.getElementById('kanbanView');
-    const listBtn = document.getElementById('listBtn');
-    const kanbanBtn = document.getElementById('kanbanBtn');
+const validateBtn = document.getElementById('validateBtn');
+if (validateBtn) {
+    validateBtn.addEventListener('click', () => {
+        const btn = document.getElementById('validateBtn');
+        btn.innerHTML = 'PROCESSING...';
+        btn.disabled = true;
 
-    if (view === 'list') {
-        listView.classList.remove('hidden');
-        kanbanView.classList.add('hidden');
-        listBtn.classList.add('active');
-        listBtn.classList.remove('text-slate-500');
-        kanbanBtn.classList.remove('active');
-        kanbanBtn.classList.add('text-slate-500');
-    } else {
-        listView.classList.add('hidden');
-        kanbanView.classList.remove('hidden');
-        kanbanBtn.classList.add('active');
-        kanbanBtn.classList.remove('text-slate-500');
-        listBtn.classList.remove('active');
-        listBtn.classList.add('text-slate-500');
-    }
-}
+        setTimeout(() => {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = "Receipt WH/IN/0001 validated successfully.";
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0) translateX(-50%)';
+            
+            btn.innerHTML = 'VALIDATE';
+            btn.disabled = false;
 
-// Real-time Search Logic
-const searchInput = document.getElementById('receiptSearch');
-if (searchInput) {
-    searchInput.addEventListener('input', (e) => {
-        const term = e.target.value.toLowerCase();
-        document.querySelectorAll('.receipt-row').forEach(row => {
-            const ref = row.querySelector('.ref-text').textContent.toLowerCase();
-            const partner = row.querySelector('.partner-text').textContent.toLowerCase();
-            row.style.display = (ref.includes(term) || partner.includes(term)) ? '' : 'none';
-        });
-        // Update kanban search if needed
-        document.querySelectorAll('#kanbanView .bg-white').forEach(card => {
-            const text = card.textContent.toLowerCase();
-            card.style.display = text.includes(term) ? '' : 'none';
-        });
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(40px) translateX(-50%)';
+            }, 3000);
+        }, 1000);
     });
 }
 
