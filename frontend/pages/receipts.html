@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreInventory | Receipts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAFC; color: #0F172A; }
+        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid #E2E8F0; }
+        .table-row-hover:hover { transform: translateY(-1px); background-color: #fdfdfd; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .active-link { color: #4F46E5; border-bottom: 2px solid #4F46E5; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="glass-nav px-8 py-3.5 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center gap-12">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                </div>
+                <span class="font-bold text-lg text-slate-800">CoreInventory</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-[13px] font-semibold text-slate-500">
+                <a href="#" class="hover:text-indigo-600 transition-colors">Dashboard</a>
+                <a href="receipts.html" class="active-link pb-1">Operations</a>
+                <a href="#" class="hover:text-indigo-600 transition-colors">Products</a>
+            </div>
+        </div>
+        <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center text-[10px] font-bold text-indigo-700">AD</div>
+    </nav>
+
+    <main class="p-8 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
+            <div>
+                <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Receipts</h1>
+                <p class="text-slate-500 text-sm mt-1">Monitor and validate all incoming stock moves.</p>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </span>
+                    <input type="text" placeholder="Search reference..." class="pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm w-64 focus:ring-4 focus:ring-indigo-500/10 outline-none transition-all">
+                </div>
+                <a href="receipt-form.html" class="px-6 py-2.5 bg-indigo-600 text-white text-xs font-bold rounded-xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition-all uppercase tracking-wider">New</a>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+            <table class="w-full text-left text-sm">
+                <thead class="bg-slate-50/50 border-b border-slate-200 text-slate-400 font-bold text-[10px] uppercase tracking-widest">
+                    <tr>
+                        <th class="px-6 py-4">Reference</th>
+                        <th class="px-6 py-4">From</th>
+                        <th class="px-6 py-4">Destination</th>
+                        <th class="px-6 py-4">Contact</th>
+                        <th class="px-6 py-4">Schedule</th>
+                        <th class="px-6 py-4">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr class="table-row-hover transition-all cursor-pointer" onclick="window.location='receipt-form.html'">
+                        <td class="px-6 py-5 font-bold text-indigo-600">WH/IN/0001</td>
+                        <td class="px-6 py-5 text-slate-600">Vendor</td>
+                        <td class="px-6 py-5 text-slate-600 font-medium italic">WH/Stock1</td>
+                        <td class="px-6 py-5 text-slate-800 font-semibold">Azure Interior</td>
+                        <td class="px-6 py-5 text-slate-500">Mar 14, 2026</td>
+                        <td class="px-6 py-5">
+                            <span class="px-3 py-1.5 bg-emerald-50 text-emerald-700 rounded-lg text-[10px] font-bold uppercase border border-emerald-100">Ready</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>
