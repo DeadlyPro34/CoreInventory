@@ -4,9 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
     <title>CoreInventory | Enterprise Authentication</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -68,7 +65,7 @@
             opacity: 0;
         }
 
-        /* --- Smoother UI Elements --- */
+        /* --- UI Elements --- */
         .auth-side-panel {
             background-color: #1E1B4B;
             background-image: radial-gradient(circle at 20% 30%, #312E81 0%, #1E1B4B 100%);
@@ -84,7 +81,6 @@
             animation: sideSlide 2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Softens the inputs */
         .input-field {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1.5px solid #E2E8F0;
@@ -99,7 +95,6 @@
             transform: translateY(-1px);
         }
 
-        /* Modern Loading Spinner */
         .spinner {
             width: 18px;
             height: 18px;
@@ -125,15 +120,35 @@
             filter: brightness(1.05);
         }
 
-        .btn-premium:active {
-            transform: translateY(0) scale(0.98);
+        @keyframes shake {
+
+            10%,
+            90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+
+            20%,
+            80% {
+                transform: translate3d(2px, 0, 0);
+            }
+
+            30%,
+            50%,
+            70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+
+            40%,
+            60% {
+                transform: translate3d(4px, 0, 0);
+            }
         }
     </style>
 </head>
 
 <body class="min-h-screen flex">
 
-    <!-- Left: Branding Panel (Smoothly Animated) -->
+    <!-- Left: Branding Panel -->
     <div class="hidden lg:flex lg:w-1/2 auth-side-panel p-20 flex-col justify-between text-white relative">
         <div class="relative z-10 animate-reveal stagger-1">
             <div class="flex items-center gap-4">
@@ -165,7 +180,6 @@
     <!-- Right: Login Form -->
     <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white">
         <div class="w-full max-w-[420px] animate-reveal stagger-2">
-            <!-- Header -->
             <div class="mb-12 text-left">
                 <div class="lg:hidden flex items-center gap-3 mb-8">
                     <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
@@ -180,17 +194,14 @@
                 <p class="text-slate-500 mt-2 font-medium">Please enter your credentials to manage stock.</p>
             </div>
 
-            <!-- Form -->
             <form id="loginForm" class="space-y-6">
-                <!-- Inline Error Alert (Smooth Fade) -->
                 <div id="errorAlert"
-                    class="hidden flex items-center p-4 text-sm text-red-800 border-l-4 border-red-500 bg-red-50 rounded-r-xl transition-all duration-300"
-                    role="alert">
+                    class="hidden flex items-center p-4 text-sm text-red-800 border-l-4 border-red-500 bg-red-50 rounded-r-xl transition-all duration-300">
                     <svg class="flex-shrink-0 inline w-4 h-4 me-3" fill="currentColor" viewBox="0 0 20 20">
                         <path
                             d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
-                    <span id="errorText" class="font-medium">Invalid credentials provided.</span>
+                    <span id="errorText" class="font-medium">Invalid credentials.</span>
                 </div>
 
                 <div class="space-y-2">
@@ -221,7 +232,7 @@
                 </div>
 
                 <button type="submit" id="submitBtn"
-                    class="w-full bg-[#4F46E5] text-white text-sm font-bold py-4 rounded-xl shadow-lg shadow-indigo-100 btn-premium flex items-center justify-center gap-3">
+                    class="w-full bg-[#4F46E5] text-white text-sm font-bold py-4 rounded-xl shadow-lg btn-premium flex items-center justify-center gap-3">
                     <div id="btnLoader" class="spinner hidden"></div>
                     <span id="btnText">Verify & Enter Dashboard</span>
                 </button>
@@ -247,35 +258,26 @@
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             errorAlert.classList.add('hidden');
+            setLoading(true);
 
             const login_id = document.getElementById('login_id').value;
             const password = document.getElementById('password').value;
 
-            setLoading(true);
-
-            try {
-                const response = await fetch('/api/login/', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ login_id, password })
-                });
-
-                const data = await response.json();
-
-                if (data.status === 'success') {
-                    // Smooth transition on success
+            // Simulated API Logic
+            setTimeout(() => {
+                if (login_id === "admin" && password === "admin") {
                     document.body.style.opacity = '0';
                     document.body.style.transition = 'opacity 0.6s ease';
-                    setTimeout(() => window.location.href = '/dashboard/', 600);
+                    // Simulated redirect
+                    setTimeout(() => {
+                        setLoading(false);
+                        alert("Authentication successful! (Redirecting to Dashboard)");
+                    }, 600);
                 } else {
-                    showError(data.message);
+                    showError("Invalid Operator ID or Security Key.");
+                    setLoading(false);
                 }
-            } catch (err) {
-                showError("Neural connection failed. Please try again.");
-            } finally {
-                // Keep loading state briefly for "smoothness"
-                setTimeout(() => setLoading(false), 500);
-            }
+            }, 1000);
         });
 
         function setLoading(isLoading) {
@@ -294,52 +296,11 @@
         function showError(msg) {
             errorText.textContent = msg;
             errorAlert.classList.remove('hidden');
-            // Subtle shake
-            const form = document.querySelector('form');
-            form.style.animation = 'none';
-            form.offsetHeight; /* trigger reflow */
-            form.style.animation = 'shake 0.4s cubic-bezier(.36,.07,.19,.97) both';
+            loginForm.style.animation = 'none';
+            loginForm.offsetHeight; /* trigger reflow */
+            loginForm.style.animation = 'shake 0.4s cubic-bezier(.36,.07,.19,.97) both';
         }
     </script>
-
-    <style>
-        @keyframes shake {
-
-            10%,
-            90% {
-                transform: translate3d(-1px, 0, 0);
-            }
-
-            20%,
-            80% {
-                transform: translate3d(2px, 0, 0);
-            }
-
-            30%,
-            50%,
-            70% {
-                transform: translate3d(-4px, 0, 0);
-            }
-
-            40%,
-            60% {
-                transform: translate3d(4px, 0, 0);
-            }
-        }
-    </style>
-=======
->>>>>>> 8aca3edd4a2568076e00302ef3d1e870891a8cc6
-    <title>Login - CoreInventory</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-
-    <script src="js/auth.js"></script>
-<<<<<<< HEAD
-=======
->>>>>>> 909361e3fc5a09ede22d18fc1f863a8379726e4b
->>>>>>> 8aca3edd4a2568076e00302ef3d1e870891a8cc6
 </body>
 
 </html>
