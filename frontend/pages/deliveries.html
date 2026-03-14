@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/deliveries.css">
 </head>
-<body class="bg-theme-light text-theme-gray font-sans antialiased min-h-screen pb-20 selection:bg-theme-light selection:text-theme-dark">
+<body class="bg-theme-light text-theme-gray font-sans antialiased min-h-screen flex flex-col">
 
     <!-- Navigation Bar -->
     <nav class="glass-panel sticky top-0 z-50 w-full mb-6">
@@ -312,6 +312,20 @@
         </div>
         <span id="toastMsg">Order created successfully!</span>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer mt-auto">
+        <div class="footer-content">
+            <div class="footer-text">
+                &copy; 2026 CoreInventory. All rights reserved.
+            </div>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Documentation</a>
+                <a href="#" class="footer-link">Support</a>
+                <a href="#" class="footer-link">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
 
     <script src="../js/deliveries.js"></script>
 </body>
