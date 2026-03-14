@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreInventory - Stock View</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="../js/tailwind.config.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/stock.css">
+</head>
+<body class="bg-theme-light text-theme-gray font-sans antialiased h-screen flex flex-col overflow-hidden selection:bg-theme-light selection:text-theme-dark">
+
+    <!-- Navigation Bar -->
+    <nav class="glass-panel sticky top-0 z-50 w-full mb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo & Main Nav -->
+                <div class="flex items-center gap-8">
+                    <div class="flex-shrink-0 cursor-pointer text-theme-dark flex items-center gap-2">
+                        <i data-lucide="boxes" class="text-theme-primary w-6 h-6"></i>
+                        <span class="font-bold text-xl tracking-tight">CoreInventory</span>
+                    </div>
+                    
+                    <div class="hidden md:flex items-center space-x-2">
+                        <a href="../dashboard.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
+                            <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
+                        </a>
+                        <!-- Operations Dropdown -->
+                        <div class="relative dropdown-container">
+                            <button class="dropdown-trigger flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
+                                <i data-lucide="arrow-right-left" class="w-4 h-4"></i> Operations
+                                <i data-lucide="chevron-down" class="w-3 h-3 ml-1 opacity-70 transition-transform duration-200"></i>
+                            </button>
+                            <div class="dropdown-content absolute left-0 mt-1 w-48 rounded-md shadow-lg bg-theme-white ring-1 ring-theme-secondary z-50 overflow-hidden">
+                                <div class="py-1">
+                                    <a href="#" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="download" class="w-4 h-4 inline mr-2 text-theme-primary"></i> Receipts</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="upload" class="w-4 h-4 inline mr-2 text-theme-dark"></i> Delivery</a>
+                                    <a href="#" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="sliders-horizontal" class="w-4 h-4 inline mr-2 text-theme-gray"></i> Adjustment</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="products.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-bold text-theme-primary bg-theme-light transition-colors">
+                            <i data-lucide="package" class="w-4 h-4"></i> Products
+                        </a>
+                        <a href="history.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
+                            <i data-lucide="history" class="w-4 h-4"></i> Move History
+                        </a>
+                        <!-- Settings Dropdown -->
+                        <div class="relative dropdown-container">
+                            <button class="dropdown-trigger flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
+                                <i data-lucide="settings" class="w-4 h-4"></i> Settings
+                                <i data-lucide="chevron-down" class="w-3 h-3 ml-1 opacity-70 transition-transform duration-200"></i>
+                            </button>
+                            <div class="dropdown-content absolute left-0 mt-1 w-56 rounded-md shadow-lg bg-theme-white ring-1 ring-theme-secondary z-50 overflow-hidden">
+                                <div class="px-4 py-2 border-b border-theme-secondary text-xs uppercase tracking-wider text-theme-dark font-bold bg-theme-light/50">Infrastructure</div>
+                                <div class="py-1">
+                                    <a href="warehouse.html" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="warehouse" class="w-4 h-4 inline mr-2 text-theme-gray"></i> Warehouse</a>
+                                    <a href="locations.html" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="map-pin" class="w-4 h-4 inline mr-2 text-theme-gray"></i> Locations</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Profile -->
+                <div class="flex items-center gap-4">
+                    <button class="text-theme-gray hover:text-theme-primary transition-colors">
+                        <i data-lucide="bell" class="w-5 h-5"></i>
+                    </button>
+                    <div class="w-8 h-8 rounded-full bg-theme-primary flex items-center justify-center font-bold text-sm text-theme-white shadow-md cursor-pointer ring-2 ring-theme-secondary hover:bg-theme-dark transition-colors">
+                        A
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-auto p-6 lg:p-8 flex flex-col gap-6 relative z-10">
+        
+        <!-- 2. Header & Controls -->
+        <header class="flex flex-col gap-4 md:flex-row md:items-center justify-between bg-white border border-violet-200 p-5 rounded-xl shadow-sm flex-shrink-0">
+            <div class="flex items-center gap-4">
+                <div class="p-2 bg-violet-50 rounded-lg border border-violet-200">
+                    <i data-lucide="package-search" class="w-6 h-6 text-indigo-600"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900 tracking-wide">Stock</h1>
+                    <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mt-0.5">Current Inventory Overview</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 w-full md:w-auto">
+                <!-- Search Bar -->
+                <div class="relative flex-1 md:w-96 group">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i data-lucide="search" class="w-4 h-4 text-gray-400 group-focus-within:text-indigo-600 transition-colors"></i>
+                    </div>
+                    <input 
+                        type="text" 
+                        id="searchInput"
+                        placeholder="Search by Product Name or SKU..." 
+                        class="w-full pl-10 pr-4 py-2.5 bg-violet-50/50 border border-violet-200 rounded-lg text-sm text-gray-800 placeholder-gray-400 focus:bg-white focus:ring-2 focus:ring-indigo-600 focus:border-transparent outline-none transition-all shadow-inner"
+                    >
+                </div>
+                
+                <button class="bg-white border border-violet-200 hover:border-indigo-400 hover:text-indigo-600 text-gray-500 p-2.5 rounded-lg transition-all shadow-sm">
+                    <i data-lucide="filter" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- 3. Inventory Data Table -->
+        <div class="flex-1 bg-white border border-violet-200 rounded-xl shadow-sm flex flex-col min-h-0 relative overflow-hidden">
+            <!-- Table Container -->
+            <div class="overflow-x-auto overflow-y-auto flex-1">
+                <table class="w-full text-left border-collapse min-w-[900px]">
+                    <thead class="bg-violet-50/80 text-gray-500 text-xs uppercase font-semibold sticky top-0 z-10 backdrop-blur-md shadow-sm border-b border-violet-200">
+                        <tr>
+                            <th class="px-6 py-4 w-10"></th> <!-- Expand Icon Column -->
+                            <th class="px-6 py-4 tracking-wider">Product / SKU</th>
+                            <th class="px-6 py-4 tracking-wider text-right">Per Unit Cost</th>
+                            <th class="px-6 py-4 tracking-wider text-right">On Hand</th>
+                            <th class="px-6 py-4 tracking-wider text-right">Reserved</th>
+                            <th class="px-6 py-4 tracking-wider text-right text-indigo-600">Free To Use</th>
+                            <th class="px-6 py-4 tracking-wider text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTableBody" class="divide-y divide-violet-100">
+                        <!-- Content injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- Pagination / Footer -->
+            <div class="bg-violet-50/50 border-t border-violet-200 px-6 py-4 text-xs text-gray-500 flex justify-between items-center">
+                <span id="recordCount">Showing 0 records</span>
+                <div class="flex gap-2">
+                    <button class="px-3 py-1.5 rounded bg-white border border-violet-200 hover:bg-violet-100 hover:text-indigo-600 transition disabled:opacity-50" disabled>Previous</button>
+                    <button class="px-3 py-1.5 rounded bg-white border border-violet-200 hover:bg-violet-100 hover:text-indigo-600 transition disabled:opacity-50" disabled>Next</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 6. Stock Adjustment Modal -->
+    <div id="adjustmentModal" class="fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-indigo-900/40 backdrop-blur-sm" id="modalBackdrop"></div>
+        
+        <!-- Modal Content -->
+        <div class="relative bg-white border border-violet-200 rounded-xl shadow-2xl w-full max-w-md p-6 transform scale-95 transition-transform duration-300" id="modalPanel">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2">
+                    <div class="p-1.5 bg-violet-100 rounded-lg text-indigo-600">
+                        <i data-lucide="sliders-horizontal" class="w-5 h-5"></i>
+                    </div>
+                    Adjust Stock
+                </h2>
+                <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600 transition bg-gray-50 hover:bg-gray-100 p-1 rounded-md">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form id="adjustStockForm" class="space-y-5">
+                <input type="hidden" id="adjustProductId">
+                
+                <div>
+                    <label class="block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wider">Product</label>
+                    <div id="adjustProductName" class="text-gray-800 font-semibold text-lg bg-violet-50/50 p-3 rounded-lg border border-violet-200"></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wider">Current On Hand</label>
+                        <div id="adjustCurrentStock" class="text-gray-700 font-mono text-lg p-3 bg-violet-50/50 rounded-lg border border-violet-200 shadow-inner">0</div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-indigo-600 mb-1 uppercase tracking-wider">New On Hand <span class="text-red-500">*</span></label>
+                        <input type="number" id="adjustNewStock" required min="0" class="w-full p-3 bg-white border border-indigo-300 rounded-lg text-gray-900 font-mono text-lg focus:ring-2 focus:ring-indigo-600 outline-none transition shadow-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-gray-500 mb-1 uppercase tracking-wider">Reason for Adjustment <span class="text-red-500">*</span></label>
+                    <select id="adjustReason" required class="w-full p-3 bg-white border border-violet-200 rounded-lg text-gray-700 focus:ring-2 focus:ring-indigo-600 outline-none transition cursor-pointer shadow-sm">
+                        <option value="">Select a reason...</option>
+                        <option value="miscount">Physical Audit / Miscount</option>
+                        <option value="damaged">Damaged Inventory</option>
+                        <option value="lost">Lost in Transit / Warehouse</option>
+                        <option value="correction">Manual Correction</option>
+                    </select>
+                </div>
+
+                <div class="pt-5 border-t border-violet-100 flex justify-end gap-3 mt-2">
+                    <button type="button" id="cancelAdjustBtn" class="px-4 py-2 rounded-lg font-medium text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition border border-transparent">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-6 py-2 rounded-lg font-medium text-sm text-white bg-indigo-600 hover:bg-indigo-700 shadow-sm focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 outline-none transition-all">
+                        Confirm Adjustment
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/stock.js"></script>
+</body>
+</html>
