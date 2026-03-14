@@ -75,9 +75,13 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
     setTimeout(() => {
         if (username === "admin" && pass === "password") {
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.6s ease';
-            setTimeout(() => window.location.href = '#dashboard', 600);
+            if (window.smoothNavigate) {
+                window.smoothNavigate('dashboard.html');
+            } else {
+                document.body.style.opacity = '0';
+                document.body.style.transition = 'opacity 0.6s ease';
+                setTimeout(() => window.location.href = 'dashboard.html', 600);
+            }
         } else {
             showAlert("Invalid username or password.");
             setLoading(e.target, false);

@@ -198,25 +198,34 @@ function renderPlaceholder(title, iconName) {
 // --- 3. Interaction & Navigation Logic ---
 
 function navigate(route) {
-    // Update active state in nav
-    document.querySelectorAll('.nav-btn').forEach(btn => {
-        btn.classList.remove('text-theme-primary', 'bg-theme-light');
-        if(btn.dataset.route === route) {
-            btn.classList.add('text-theme-primary', 'bg-theme-light');
-        }
-    });
+    const isRoot = window.location.pathname.endsWith('dashboard.html') || window.location.pathname.endsWith('/');
+    
+    // If we're already on dashboard and requesting dashboard, just render it (no reload)
+    if (route === 'dashboard' && isRoot) {
+        renderDashboard();
+        return;
+    }
 
-    // Route mapping
-    switch(route) {
-        case 'dashboard': renderDashboard(); break;
-        case 'receipts': renderPlaceholder('Receipts', 'download'); break;
-        case 'deliveries': renderPlaceholder('Deliveries', 'upload'); break;
-        case 'adjustments': renderPlaceholder('Adjustments', 'sliders-horizontal'); break;
-        case 'stock': renderPlaceholder('Stock Inventory', 'package'); break;
-        case 'history': renderPlaceholder('Move History', 'history'); break;
-        case 'warehouses': renderPlaceholder('Warehouse Settings', 'warehouse'); break;
-        case 'locations': renderPlaceholder('Location Config', 'map-pin'); break;
-        default: renderDashboard();
+    // Route mapping to actual files
+    const routes = {
+        'dashboard': isRoot ? 'dashboard.html' : '../dashboard.html',
+        'receipts': isRoot ? 'pages/receipts.html' : 'receipts.html',
+        'deliveries': isRoot ? 'pages/deliveries.html' : 'deliveries.html',
+        'stock': isRoot ? 'pages/stock.html' : 'stock.html',
+        'history': isRoot ? 'pages/history.html' : 'history.html',
+        'warehouses': isRoot ? 'pages/warehouse.html' : 'warehouse.html',
+        'locations': isRoot ? 'pages/locations.html' : 'locations.html',
+        'products': isRoot ? 'pages/products.html' : 'products.html',
+        'adjustments': 'javascript:void(0)' // Placeholder
+    };
+
+    if (routes[route]) {
+        // If smoothNavigate is available (from transitions.js), use it
+        if (window.smoothNavigate) {
+            window.smoothNavigate(routes[route]);
+        } else {
+            window.location.href = routes[route];
+        }
     }
 }
 

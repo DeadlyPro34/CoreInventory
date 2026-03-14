@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,9 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/deliveries.css">
 </head>
-<body class="bg-theme-light text-theme-gray font-sans antialiased min-h-screen flex flex-col">
+
+<body
+    class="bg-theme-light text-theme-gray font-sans antialiased min-h-screen pb-20 selection:bg-theme-light selection:text-theme-dark">
 
     <!-- Navigation Bar -->
     <nav class="glass-panel sticky top-0 z-50 w-full mb-6">
@@ -20,7 +23,8 @@
                 <!-- Logo & Main Nav -->
                 <div class="flex items-center gap-8">
                     <!-- Mobile Menu Button -->
-                    <button id="mobile-menu-toggle" class="md:hidden text-theme-gray hover:text-theme-primary transition-colors">
+                    <button id="mobile-menu-toggle"
+                        class="md:hidden text-theme-gray hover:text-theme-primary transition-colors">
                         <i data-lucide="menu" class="w-6 h-6"></i>
                     </button>
 
@@ -28,42 +32,59 @@
                         <i data-lucide="boxes" class="text-theme-primary w-6 h-6"></i>
                         <span class="font-bold text-xl tracking-tight hidden xs:block">CoreInventory</span>
                     </div>
-                    
+
                     <div class="hidden md:flex items-center space-x-2">
-                        <a href="../dashboard.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
+                        <a href="../dashboard.html"
+                            class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
                             <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Dashboard
                         </a>
                         <!-- Operations Dropdown -->
                         <div class="relative dropdown-container">
-                            <button class="dropdown-trigger flex items-center gap-2 px-3 py-2 rounded-md text-sm font-bold text-theme-primary bg-theme-light transition-colors">
+                            <button
+                                class="dropdown-trigger flex items-center gap-2 px-3 py-2 rounded-md text-sm font-bold text-theme-primary bg-theme-light transition-colors">
                                 <i data-lucide="arrow-right-left" class="w-4 h-4"></i> Operations
-                                <i data-lucide="chevron-down" class="w-3 h-3 ml-1 opacity-70 transition-transform duration-200"></i>
+                                <i data-lucide="chevron-down"
+                                    class="w-3 h-3 ml-1 opacity-70 transition-transform duration-200"></i>
                             </button>
-                            <div class="dropdown-content absolute left-0 mt-1 w-48 rounded-md shadow-lg bg-theme-white ring-1 ring-theme-secondary z-50 overflow-hidden">
+                            <div
+                                class="dropdown-content absolute left-0 mt-1 w-48 rounded-md shadow-lg bg-theme-white ring-1 ring-theme-secondary z-50 overflow-hidden">
                                 <div class="py-1">
-                                    <a href="#" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="download" class="w-4 h-4 inline mr-2 text-theme-primary"></i> Receipts</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="upload" class="w-4 h-4 inline mr-2 text-theme-dark"></i> Delivery</a>
+                                    <a href="receipts.html" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="download" class="w-4 h-4 inline mr-2 text-theme-primary"></i> Receipts</a>
+                                    <a href="deliveries.html" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="upload" class="w-4 h-4 inline mr-2 text-theme-dark"></i> Delivery</a>
                                     <a href="#" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="sliders-horizontal" class="w-4 h-4 inline mr-2 text-theme-gray"></i> Adjustment</a>
                                 </div>
                             </div>
                         </div>
-                        <a href="products.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
+                        <a href="products.html"
+                            class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
                             <i data-lucide="package" class="w-4 h-4"></i> Products
                         </a>
-                        <a href="history.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
+                        <a href="history.html"
+                            class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
                             <i data-lucide="history" class="w-4 h-4"></i> Move History
                         </a>
                         <!-- Settings Dropdown -->
                         <div class="relative dropdown-container">
-                            <button class="dropdown-trigger flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
+                            <button
+                                class="dropdown-trigger flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-theme-gray hover:bg-theme-light hover:text-theme-primary transition-colors">
                                 <i data-lucide="settings" class="w-4 h-4"></i> Settings
-                                <i data-lucide="chevron-down" class="w-3 h-3 ml-1 opacity-70 transition-transform duration-200"></i>
+                                <i data-lucide="chevron-down"
+                                    class="w-3 h-3 ml-1 opacity-70 transition-transform duration-200"></i>
                             </button>
-                            <div class="dropdown-content absolute left-0 mt-1 w-56 rounded-md shadow-lg bg-theme-white ring-1 ring-theme-secondary z-50 overflow-hidden">
-                                <div class="px-4 py-2 border-b border-theme-secondary text-xs uppercase tracking-wider text-theme-dark font-bold bg-theme-light/50">Infrastructure</div>
+                            <div
+                                class="dropdown-content absolute left-0 mt-1 w-56 rounded-md shadow-lg bg-theme-white ring-1 ring-theme-secondary z-50 overflow-hidden">
+                                <div
+                                    class="px-4 py-2 border-b border-theme-secondary text-xs uppercase tracking-wider text-theme-dark font-bold bg-theme-light/50">
+                                    Infrastructure</div>
                                 <div class="py-1">
-                                    <a href="warehouse.html" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="warehouse" class="w-4 h-4 inline mr-2 text-theme-gray"></i> Warehouse</a>
-                                    <a href="locations.html" class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i data-lucide="map-pin" class="w-4 h-4 inline mr-2 text-theme-gray"></i> Locations</a>
+                                    <a href="warehouse.html"
+                                        class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i
+                                            data-lucide="warehouse" class="w-4 h-4 inline mr-2 text-theme-gray"></i>
+                                        Warehouse</a>
+                                    <a href="locations.html"
+                                        class="block px-4 py-2 text-sm text-theme-gray hover:bg-theme-light hover:text-theme-primary"><i
+                                            data-lucide="map-pin" class="w-4 h-4 inline mr-2 text-theme-gray"></i>
+                                        Locations</a>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +96,8 @@
                     <button class="text-theme-gray hover:text-theme-primary transition-colors">
                         <i data-lucide="bell" class="w-5 h-5"></i>
                     </button>
-                    <div class="w-8 h-8 rounded-full bg-theme-primary flex items-center justify-center font-bold text-sm text-theme-white shadow-md cursor-pointer ring-2 ring-theme-secondary hover:bg-theme-dark transition-colors">
+                    <div
+                        class="w-8 h-8 rounded-full bg-theme-primary flex items-center justify-center font-bold text-sm text-theme-white shadow-md cursor-pointer ring-2 ring-theme-secondary hover:bg-theme-dark transition-colors">
                         A
                     </div>
                 </div>
@@ -130,17 +152,23 @@
                 <h1 class="text-3xl font-bold text-[#312E81]">Delivery Orders</h1>
                 <p class="text-slate-500 mt-1">Manage outbound logistics and shipping schedules.</p>
             </div>
-            
+
             <div class="flex items-center gap-3">
-                <button onclick="toggleModal(true)" class="px-6 py-2.5 bg-[#4F46E5] hover:bg-[#312E81] text-white rounded-xl font-bold transition-all shadow-lg flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path></svg>
+                <button onclick="toggleModal(true)"
+                    class="px-6 py-2.5 bg-[#4F46E5] hover:bg-[#312E81] text-white rounded-xl font-bold transition-all shadow-lg flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4">
+                        </path>
+                    </svg>
                     NEW
                 </button>
-                
+
                 <!-- View Switcher -->
                 <div class="bg-slate-200/50 p-1 rounded-xl flex">
-                    <button onclick="toggleView('list')" id="listTab" class="px-4 py-1.5 text-xs font-bold rounded-lg transition-all tab-active">LIST</button>
-                    <button onclick="toggleView('kanban')" id="kanbanTab" class="px-4 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500">GRID</button>
+                    <button onclick="toggleView('list')" id="listTab"
+                        class="px-4 py-1.5 text-xs font-bold rounded-lg transition-all tab-active">LIST</button>
+                    <button onclick="toggleView('kanban')" id="kanbanTab"
+                        class="px-4 py-1.5 text-xs font-bold rounded-lg transition-all text-slate-500">GRID</button>
                 </div>
             </div>
         </div>
@@ -148,16 +176,19 @@
         <!-- Dynamic Search Bar -->
         <div class="mt-8 relative max-w-md">
             <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
             </span>
-            <input type="text" id="deliverySearch" placeholder="Search by reference or contact..." 
+            <input type="text" id="deliverySearch" placeholder="Search by reference or contact..."
                 class="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:ring-4 focus:ring-indigo-100 focus:border-[#4F46E5] outline-none transition-all shadow-sm">
         </div>
     </header>
 
     <!-- Main Content Area -->
     <main class="max-w-7xl mx-auto px-6">
-        
+
         <!-- List View Container -->
         <div id="listView" class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden animate-fade">
             <div class="overflow-x-auto">
@@ -173,34 +204,37 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-50">
-                        <tr class="hover:bg-slate-50/80 transition-colors cursor-pointer group delivery-row">
+                        <tr class="hover:bg-slate-50/80 transition-colors cursor-pointer group delivery-row" onclick="smoothNavigate('delivery-form.html')">
                             <td class="px-6 py-5 font-bold text-[#4F46E5] ref-text">WH/OUT/0001</td>
                             <td class="px-6 py-5 text-slate-600">WH/Stock1</td>
                             <td class="px-6 py-5 text-slate-600 italic">Vendor</td>
                             <td class="px-6 py-5 font-medium text-slate-800 contact-text">Azure Interior</td>
                             <td class="px-6 py-5 text-slate-400">—</td>
                             <td class="px-6 py-5">
-                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">Ready</span>
+                                <span
+                                    class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">Ready</span>
                             </td>
                         </tr>
-                        <tr class="hover:bg-slate-50/80 transition-colors cursor-pointer group delivery-row">
+                        <tr class="hover:bg-slate-50/80 transition-colors cursor-pointer group delivery-row" onclick="smoothNavigate('delivery-form.html')">
                             <td class="px-6 py-5 font-bold text-[#4F46E5] ref-text">WH/OUT/0002</td>
                             <td class="px-6 py-5 text-slate-600">WH/Stock1</td>
                             <td class="px-6 py-5 text-slate-600 italic">Vendor</td>
                             <td class="px-6 py-5 font-medium text-slate-800 contact-text">Azure Interior</td>
                             <td class="px-6 py-5 text-slate-400">—</td>
                             <td class="px-6 py-5">
-                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">Waiting</span>
+                                <span
+                                    class="px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700">Waiting</span>
                             </td>
                         </tr>
-                        <tr class="hover:bg-slate-50/80 transition-colors cursor-pointer group delivery-row">
+                        <tr class="hover:bg-slate-50/80 transition-colors cursor-pointer group delivery-row" onclick="smoothNavigate('delivery-form.html')">
                             <td class="px-6 py-5 font-bold text-[#4F46E5] ref-text">WH/OUT/0003</td>
                             <td class="px-6 py-5 text-slate-600">WH/Stock1</td>
                             <td class="px-6 py-5 text-slate-600 italic">Partner</td>
                             <td class="px-6 py-5 font-medium text-slate-800 contact-text">Modern Loft</td>
                             <td class="px-6 py-5 text-slate-400">2023-11-25</td>
                             <td class="px-6 py-5">
-                                <span class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">Draft</span>
+                                <span
+                                    class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-500">Draft</span>
                             </td>
                         </tr>
                     </tbody>
@@ -217,7 +251,8 @@
                         <h3 class="font-bold text-slate-500 uppercase text-xs tracking-widest">Draft</h3>
                     </div>
                     <div class="kanban-column p-4 rounded-3xl space-y-4" id="kanban-draft">
-                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-300 transition-colors kanban-card" data-ref="WH/OUT/0003" data-contact="Modern Loft">
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-300 transition-colors kanban-card cursor-pointer" onclick="smoothNavigate('delivery-form.html')"
+                            data-ref="WH/OUT/0003" data-contact="Modern Loft">
                             <div class="flex justify-between items-start mb-3">
                                 <span class="text-[10px] font-black text-indigo-400 uppercase">WH/OUT/0003</span>
                                 <div class="w-2 h-2 rounded-full bg-slate-300"></div>
@@ -234,7 +269,8 @@
                         <h3 class="font-bold text-slate-500 uppercase text-xs tracking-widest">Waiting</h3>
                     </div>
                     <div class="kanban-column p-4 rounded-3xl space-y-4" id="kanban-waiting">
-                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100 hover:border-amber-300 transition-colors kanban-card" data-ref="WH/OUT/0002" data-contact="Azure Interior">
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100 hover:border-amber-300 transition-colors kanban-card cursor-pointer" onclick="smoothNavigate('delivery-form.html')"
+                            data-ref="WH/OUT/0002" data-contact="Azure Interior">
                             <div class="flex justify-between items-start mb-3">
                                 <span class="text-[10px] font-black text-amber-500 uppercase">WH/OUT/0002</span>
                                 <div class="w-2 h-2 rounded-full bg-amber-400"></div>
@@ -251,7 +287,8 @@
                         <h3 class="font-bold text-slate-500 uppercase text-xs tracking-widest">Ready</h3>
                     </div>
                     <div class="kanban-column p-4 rounded-3xl space-y-4" id="kanban-ready">
-                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 hover:border-emerald-300 transition-colors kanban-card" data-ref="WH/OUT/0001" data-contact="Azure Interior">
+                        <div class="bg-white p-4 rounded-2xl shadow-sm border border-emerald-100 hover:border-emerald-300 transition-colors kanban-card cursor-pointer" onclick="smoothNavigate('delivery-form.html')"
+                            data-ref="WH/OUT/0001" data-contact="Azure Interior">
                             <div class="flex justify-between items-start mb-3">
                                 <span class="text-[10px] font-black text-emerald-500 uppercase">WH/OUT/0001</span>
                                 <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
@@ -266,39 +303,56 @@
     </main>
 
     <!-- NEW ORDER MODAL -->
-    <div id="modalOverlay" class="fixed inset-0 z-[100] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
-        <div class="bg-white w-full max-w-lg rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-95 transition-all duration-300" id="modalContainer">
+    <div id="modalOverlay"
+        class="fixed inset-0 z-[100] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white w-full max-w-lg rounded-[2.5rem] shadow-2xl overflow-hidden transform scale-95 transition-all duration-300"
+            id="modalContainer">
             <div class="p-8 md:p-10">
                 <div class="flex justify-between items-center mb-8">
                     <h2 class="text-2xl font-bold text-[#312E81]">New Delivery Order</h2>
-                    <button onclick="toggleModal(false)" class="p-2 hover:bg-slate-100 rounded-full text-slate-400 transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <button onclick="toggleModal(false)"
+                        class="p-2 hover:bg-slate-100 rounded-full text-slate-400 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
                     </button>
                 </div>
-                
+
                 <form id="newDeliveryForm" class="space-y-6">
                     <div class="space-y-2">
-                        <label class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Contact / Partner</label>
-                        <input type="text" id="newContact" placeholder="e.g. Azure Interior" class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-indigo-100 focus:border-[#4F46E5] transition-all" required>
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Contact /
+                            Partner</label>
+                        <input type="text" id="newContact" placeholder="e.g. Azure Interior"
+                            class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-indigo-100 focus:border-[#4F46E5] transition-all"
+                            required>
                     </div>
-                    
+
                     <div class="grid grid-cols-2 gap-4">
                         <div class="space-y-2">
-                            <label class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Source Location</label>
-                            <select class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-indigo-100 focus:border-[#4F46E5] transition-all">
+                            <label class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Source
+                                Location</label>
+                            <select
+                                class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-indigo-100 focus:border-[#4F46E5] transition-all">
                                 <option>WH/Stock1</option>
                                 <option>WH/Stock2</option>
                             </select>
                         </div>
                         <div class="space-y-2">
-                            <label class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Destination</label>
-                            <input type="text" placeholder="Vendor/Customer" class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-indigo-100 focus:border-[#4F46E5] transition-all" required>
+                            <label
+                                class="text-xs font-bold uppercase tracking-widest text-slate-400 ml-1">Destination</label>
+                            <input type="text" placeholder="Vendor/Customer"
+                                class="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:ring-4 focus:ring-indigo-100 focus:border-[#4F46E5] transition-all"
+                                required>
                         </div>
                     </div>
 
                     <div class="pt-4 flex gap-3">
-                        <button type="button" onclick="toggleModal(false)" class="flex-1 py-4 text-slate-500 font-bold hover:bg-slate-50 rounded-2xl transition-all">Cancel</button>
-                        <button type="submit" class="flex-1 py-4 bg-[#4F46E5] text-white font-bold rounded-2xl shadow-lg shadow-indigo-100 hover:bg-[#312E81] transition-all">Create Order</button>
+                        <button type="button" onclick="toggleModal(false)"
+                            class="flex-1 py-4 text-slate-500 font-bold hover:bg-slate-50 rounded-2xl transition-all">Cancel</button>
+                        <button type="submit"
+                            class="flex-1 py-4 bg-[#4F46E5] text-white font-bold rounded-2xl shadow-lg shadow-indigo-100 hover:bg-[#312E81] transition-all">Create
+                            Order</button>
                     </div>
                 </form>
             </div>
@@ -306,27 +360,18 @@
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-8 py-4 rounded-2xl text-sm font-bold shadow-2xl opacity-0 translate-y-10 transition-all pointer-events-none z-[200] flex items-center gap-3">
+    <div id="toast"
+        class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-8 py-4 rounded-2xl text-sm font-bold shadow-2xl opacity-0 translate-y-10 transition-all pointer-events-none z-[200] flex items-center gap-3">
         <div class="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
-            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+            </svg>
         </div>
         <span id="toastMsg">Order created successfully!</span>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer mt-auto">
-        <div class="footer-content">
-            <div class="footer-text">
-                &copy; 2026 CoreInventory. All rights reserved.
-            </div>
-            <div class="footer-links">
-                <a href="#" class="footer-link">Documentation</a>
-                <a href="#" class="footer-link">Support</a>
-                <a href="#" class="footer-link">Privacy Policy</a>
-            </div>
-        </div>
-    </footer>
-
+    <script src="../js/transitions.js"></script>
     <script src="../js/deliveries.js"></script>
 </body>
+
 </html>

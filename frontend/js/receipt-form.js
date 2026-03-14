@@ -10,7 +10,7 @@ if (validateBtn) {
             document.getElementById('toastMsg').textContent = "Receipt WH/IN/0001 validated successfully.";
             toast.style.opacity = '1';
             toast.style.transform = 'translateY(0) translateX(-50%)';
-            
+
             btn.innerHTML = 'VALIDATE';
             btn.disabled = false;
 
@@ -68,37 +68,9 @@ const setupDropdowns = () => {
     });
 };
 
-// Mobile Menu Toggle Logic
-function toggleMobileMenu(show) {
-    const sidebar = document.getElementById('mobile-sidebar');
-    const overlay = document.getElementById('sidebar-overlay');
-    if (sidebar && overlay) {
-        if (show) {
-            sidebar.classList.add('show');
-            overlay.classList.add('show');
-            document.body.style.overflow = 'hidden'; // Prevent scroll
-        } else {
-            sidebar.classList.remove('show');
-            overlay.classList.remove('show');
-            document.body.style.overflow = ''; // Restore scroll
-        }
-    }
-}
-
-function setupMobileMenu() {
-    const toggleBtn = document.getElementById('mobile-menu-toggle');
-    const closeBtn = document.getElementById('close-sidebar');
-    const overlay = document.getElementById('sidebar-overlay');
-
-    if (toggleBtn) toggleBtn.addEventListener('click', () => toggleMobileMenu(true));
-    if (closeBtn) closeBtn.addEventListener('click', () => toggleMobileMenu(false));
-    if (overlay) overlay.addEventListener('click', () => toggleMobileMenu(false));
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof lucide !== 'undefined') {
         lucide.createIcons();
     }
     setupDropdowns();
-    setupMobileMenu();
 });
