@@ -4,144 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
     <title>CoreInventory | Enterprise Authentication</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #4F46E5;
-            --primary-hover: #4338CA;
-            --bg-slate: #F8FAFC;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-slate);
-            color: #1E293B;
-            overflow: hidden;
-        }
-
-        /* --- Smooth Animations --- */
-        @keyframes revealUp {
-            from {
-                opacity: 0;
-                transform: translateY(24px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes sideSlide {
-            from {
-                transform: scale(1.1);
-                opacity: 0;
-            }
-
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .animate-reveal {
-            animation: revealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .stagger-1 {
-            animation-delay: 0.1s;
-            opacity: 0;
-        }
-
-        .stagger-2 {
-            animation-delay: 0.2s;
-            opacity: 0;
-        }
-
-        .stagger-3 {
-            animation-delay: 0.3s;
-            opacity: 0;
-        }
-
-        /* --- Smoother UI Elements --- */
-        .auth-side-panel {
-            background-color: #1E1B4B;
-            background-image: radial-gradient(circle at 20% 30%, #312E81 0%, #1E1B4B 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .auth-side-panel::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234f46e5' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            animation: sideSlide 2s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        /* Softens the inputs */
-        .input-field {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1.5px solid #E2E8F0;
-            background: #F8FAFC;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: #FFFFFF;
-            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.08);
-            transform: translateY(-1px);
-        }
-
-        /* Modern Loading Spinner */
-        .spinner {
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 0.7s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .btn-premium {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
-        }
-
-        .btn-premium:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 24px -6px rgba(79, 70, 229, 0.3);
-            filter: brightness(1.05);
-        }
-
-        .btn-premium:active {
-            transform: translateY(0) scale(0.98);
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body class="min-h-screen flex">
 
-    <!-- Left: Branding Panel (Smoothly Animated) -->
+    <!-- Left: Branding Panel -->
     <div class="hidden lg:flex lg:w-1/2 auth-side-panel p-20 flex-col justify-between text-white relative">
         <div class="relative z-10 animate-reveal stagger-1">
             <div class="flex items-center gap-4">
-                <div
-                    class="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center shadow-2xl shadow-indigo-500/20">
+                <div class="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center shadow-2xl shadow-indigo-500/20">
                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                     </svg>
                 </div>
                 <span class="text-2xl font-bold tracking-tight">CoreInventory</span>
@@ -149,11 +26,9 @@
         </div>
 
         <div class="max-w-md relative z-10 animate-reveal stagger-2">
-            <h2 class="text-5xl font-bold leading-[1.1] mb-6 tracking-tight">Precision at <span
-                    class="text-indigo-400">Scale.</span></h2>
+            <h2 class="text-5xl font-bold leading-[1.1] mb-6 tracking-tight">Precision at <span class="text-indigo-400">Scale.</span></h2>
             <p class="text-indigo-100/80 text-lg leading-relaxed font-light">
-                Enterprise-grade logistics and warehouse management. Harmonize your stock flow across multiple global
-                hubs in real-time.
+                Enterprise-grade logistics and warehouse management. Harmonize your stock flow across multiple global hubs in real-time.
             </p>
         </div>
 
@@ -165,13 +40,11 @@
     <!-- Right: Login Form -->
     <div class="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white">
         <div class="w-full max-w-[420px] animate-reveal stagger-2">
-            <!-- Header -->
             <div class="mb-12 text-left">
                 <div class="lg:hidden flex items-center gap-3 mb-8">
                     <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
                         </svg>
                     </div>
                     <span class="text-xl font-bold text-indigo-950">CoreInventory</span>
@@ -180,48 +53,33 @@
                 <p class="text-slate-500 mt-2 font-medium">Please enter your credentials to manage stock.</p>
             </div>
 
-            <!-- Form -->
             <form id="loginForm" class="space-y-6">
-                <!-- Inline Error Alert (Smooth Fade) -->
-                <div id="errorAlert"
-                    class="hidden flex items-center p-4 text-sm text-red-800 border-l-4 border-red-500 bg-red-50 rounded-r-xl transition-all duration-300"
-                    role="alert">
+                <div id="errorAlert" class="hidden flex items-center p-4 text-sm text-red-800 border-l-4 border-red-500 bg-red-50 rounded-r-xl transition-all duration-300">
                     <svg class="flex-shrink-0 inline w-4 h-4 me-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                            d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                     </svg>
-                    <span id="errorText" class="font-medium">Invalid credentials provided.</span>
+                    <span id="errorText" class="font-medium">Invalid credentials.</span>
                 </div>
 
                 <div class="space-y-2">
-                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-1"
-                        for="login_id">Operator ID</label>
-                    <input type="text" id="login_id"
-                        class="w-full px-5 py-3.5 rounded-xl text-sm text-slate-900 input-field"
-                        placeholder="e.g. WM_7729" required>
+                    <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-widest ml-1" for="login_id">Operator ID</label>
+                    <input type="text" id="login_id" class="w-full px-5 py-3.5 rounded-xl text-sm text-slate-900 input-field" placeholder="e.g. WM_7729" required>
                 </div>
 
                 <div class="space-y-2">
                     <div class="flex justify-between items-center ml-1">
-                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-widest"
-                            for="password">Security Key</label>
-                        <a href="#"
-                            class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">Recovery?</a>
+                        <label class="block text-[11px] font-bold text-slate-400 uppercase tracking-widest" for="password">Security Key</label>
+                        <a href="#" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 transition-colors">Recovery?</a>
                     </div>
-                    <input type="password" id="password"
-                        class="w-full px-5 py-3.5 rounded-xl text-sm text-slate-900 input-field" placeholder="••••••••"
-                        required>
+                    <input type="password" id="password" class="w-full px-5 py-3.5 rounded-xl text-sm text-slate-900 input-field" placeholder="••••••••" required>
                 </div>
 
                 <div class="flex items-center px-1">
-                    <input id="remember" type="checkbox"
-                        class="w-4 h-4 text-indigo-600 border-slate-300 rounded-md focus:ring-indigo-500 transition-all">
-                    <label for="remember" class="ml-2.5 text-sm font-medium text-slate-600 select-none">Stay
-                        authenticated</label>
+                    <input id="remember" type="checkbox" class="w-4 h-4 text-indigo-600 border-slate-300 rounded-md focus:ring-indigo-500 transition-all">
+                    <label for="remember" class="ml-2.5 text-sm font-medium text-slate-600 select-none">Stay authenticated</label>
                 </div>
 
-                <button type="submit" id="submitBtn"
-                    class="w-full bg-[#4F46E5] text-white text-sm font-bold py-4 rounded-xl shadow-lg shadow-indigo-100 btn-premium flex items-center justify-center gap-3">
+                <button type="submit" id="submitBtn" class="w-full bg-[#4F46E5] text-white text-sm font-bold py-4 rounded-xl shadow-lg btn-premium flex items-center justify-center gap-3">
                     <div id="btnLoader" class="spinner hidden"></div>
                     <span id="btnText">Verify & Enter Dashboard</span>
                 </button>
@@ -229,117 +87,12 @@
 
             <div class="mt-10 pt-10 border-t border-slate-100 flex items-center justify-between text-sm">
                 <span class="text-slate-400 font-medium">Unauthorized user?</span>
-                <a href="#"
-                    class="font-bold text-indigo-600 hover:text-indigo-800 underline-offset-4 hover:underline transition-all">Request
-                    Token</a>
+                <a href="#" class="font-bold text-indigo-600 hover:text-indigo-800 underline-offset-4 hover:underline transition-all">Request Token</a>
             </div>
         </div>
     </div>
 
-    <script>
-        const loginForm = document.getElementById('loginForm');
-        const errorAlert = document.getElementById('errorAlert');
-        const errorText = document.getElementById('errorText');
-        const submitBtn = document.getElementById('submitBtn');
-        const btnLoader = document.getElementById('btnLoader');
-        const btnText = document.getElementById('btnText');
-
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            errorAlert.classList.add('hidden');
-
-            const login_id = document.getElementById('login_id').value;
-            const password = document.getElementById('password').value;
-
-            setLoading(true);
-
-            try {
-                const response = await fetch('/api/login/', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ login_id, password })
-                });
-
-                const data = await response.json();
-
-                if (data.status === 'success') {
-                    // Smooth transition on success
-                    document.body.style.opacity = '0';
-                    document.body.style.transition = 'opacity 0.6s ease';
-                    setTimeout(() => window.location.href = '/dashboard/', 600);
-                } else {
-                    showError(data.message);
-                }
-            } catch (err) {
-                showError("Neural connection failed. Please try again.");
-            } finally {
-                // Keep loading state briefly for "smoothness"
-                setTimeout(() => setLoading(false), 500);
-            }
-        });
-
-        function setLoading(isLoading) {
-            submitBtn.disabled = isLoading;
-            if (isLoading) {
-                btnLoader.classList.remove('hidden');
-                btnText.textContent = 'Authenticating...';
-                submitBtn.classList.add('opacity-90', 'cursor-wait');
-            } else {
-                btnLoader.classList.add('hidden');
-                btnText.textContent = 'Verify & Enter Dashboard';
-                submitBtn.classList.remove('opacity-90', 'cursor-wait');
-            }
-        }
-
-        function showError(msg) {
-            errorText.textContent = msg;
-            errorAlert.classList.remove('hidden');
-            // Subtle shake
-            const form = document.querySelector('form');
-            form.style.animation = 'none';
-            form.offsetHeight; /* trigger reflow */
-            form.style.animation = 'shake 0.4s cubic-bezier(.36,.07,.19,.97) both';
-        }
-    </script>
-
-    <style>
-        @keyframes shake {
-
-            10%,
-            90% {
-                transform: translate3d(-1px, 0, 0);
-            }
-
-            20%,
-            80% {
-                transform: translate3d(2px, 0, 0);
-            }
-
-            30%,
-            50%,
-            70% {
-                transform: translate3d(-4px, 0, 0);
-            }
-
-            40%,
-            60% {
-                transform: translate3d(4px, 0, 0);
-            }
-        }
-    </style>
-=======
->>>>>>> 8aca3edd4a2568076e00302ef3d1e870891a8cc6
-    <title>Login - CoreInventory</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-
     <script src="js/auth.js"></script>
-<<<<<<< HEAD
-=======
->>>>>>> 909361e3fc5a09ede22d18fc1f863a8379726e4b
->>>>>>> 8aca3edd4a2568076e00302ef3d1e870891a8cc6
 </body>
 
 </html>
