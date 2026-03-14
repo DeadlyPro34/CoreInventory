@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreInventory | Stock Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --secondary: #C4B5FD;
+            --dark-indigo: #312E81;
+            --bg-lavender: #F5F3FF;
+            --text-gray: #374151;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-lavender);
+            color: var(--text-gray);
+        }
+
+        /* Glassmorphism Navigation */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(79, 70, 229, 0.1);
+        }
+
+        /* Table Row Hover & Animation */
+        .table-row {
+            transition: all 0.2s ease;
+        }
+        .table-row:hover {
+            background-color: #FDFDFF;
+            transform: scale(1.002);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Floating Action Button Pulse */
+        @keyframes pulse-custom {
+            0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(79, 70, 229, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+        }
+        .fab-pulse {
+            animation: pulse-custom 2s infinite;
+        }
+
+        /* Custom Input Focus */
+        .search-focus:focus {
+            box-shadow: 0 0 0 4px rgba(196, 181, 253, 0.3);
+            border-color: var(--primary);
+        }
+
+        /* Status Badges */
+        .badge-pill {
+            padding: 2px 10px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        /* Modal Blur */
+        .modal-overlay {
+            background: rgba(49, 46, 129, 0.4);
+            backdrop-filter: blur(4px);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Navigation Bar -->
+    <nav class="glass-nav sticky top-0 z-50 px-6 py-3">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-[#4F46E5] rounded-lg flex items-center justify-center text-white shadow-lg">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-[#312E81]">CoreInventory</span>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-1">
+                    <a href="#" class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-[#4F46E5] transition-colors">Dashboard</a>
+                    <a href="#" class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-[#4F46E5] transition-colors">Operations</a>
+                    <a href="#" class="px-4 py-2 text-sm font-bold text-[#4F46E5] bg-indigo-50 rounded-lg">Products</a>
+                    <a href="#" class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-[#4F46E5] transition-colors">Move History</a>
+                    <a href="#" class="px-4 py-2 text-sm font-medium text-slate-500 hover:text-[#4F46E5] transition-colors">Settings</a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button class="p-2 text-slate-400 hover:text-[#4F46E5] relative">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v1m6 0H9"></path></svg>
+                    <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+                <div class="w-9 h-9 bg-[#C4B5FD] rounded-full border-2 border-white shadow-sm cursor-pointer hover:opacity-80 transition-opacity"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-10 animate-in fade-in duration-700">
+        
+        <!-- Page Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-[#312E81]">Stock Management</h1>
+                <p class="text-slate-500 mt-1">Monitor and update your product inventory levels.</p>
+            </div>
+
+            <div class="relative group">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </span>
+                <input type="text" id="searchInput" placeholder="Search products..." class="pl-10 pr-4 py-2.5 w-full md:w-80 bg-white border border-slate-200 rounded-xl search-focus transition-all text-sm outline-none">
+            </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse" id="stockTable">
+                    <thead>
+                        <tr class="bg-slate-50/50 border-bottom border-slate-100">
+                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Product</th>
+                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Per Unit Cost</th>
+                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-center">On Hand</th>
+                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-center">Free to Use</th>
+                            <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <!-- Row 1 -->
+                        <tr class="table-row group">
+                            <td class="px-6 py-5">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-indigo-50 rounded-lg flex items-center justify-center text-indigo-600">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                                    </div>
+                                    <span class="font-semibold text-slate-800">Office Desk</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-5 text-slate-600 font-medium">3,000 Rs</td>
+                            <td class="px-6 py-5 text-center">
+                                <input type="number" value="50" class="w-16 text-center py-1 rounded bg-slate-50 border border-slate-200 focus:border-indigo-400 outline-none text-sm">
+                            </td>
+                            <td class="px-6 py-5 text-center">
+                                <span class="badge-pill bg-green-100 text-green-700">45 Units</span>
+                            </td>
+                            <td class="px-6 py-5 text-right">
+                                <button class="px-4 py-1.5 text-xs font-bold text-white bg-[#4F46E5] rounded-lg hover:bg-[#312E81] transition-all shadow-sm">Update</button>
+                            </td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr class="table-row group">
+                            <td class="px-6 py-5">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-purple-50 rounded-lg flex items-center justify-center text-purple-600">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                                    </div>
+                                    <span class="font-semibold text-slate-800">Conference Table</span>
+                                </div>
+                            </td>
+                            <td class="px-6 py-5 text-slate-600 font-medium">3,000 Rs</td>
+                            <td class="px-6 py-5 text-center">
+                                <input type="number" value="50" class="w-16 text-center py-1 rounded bg-slate-50 border border-slate-200 focus:border-indigo-400 outline-none text-sm">
+                            </td>
+                            <td class="px-6 py-5 text-center">
+                                <span class="badge-pill bg-blue-100 text-blue-700">50 Units</span>
+                            </td>
+                            <td class="px-6 py-5 text-right">
+                                <button class="px-4 py-1.5 text-xs font-bold text-white bg-[#4F46E5] rounded-lg hover:bg-[#312E81] transition-all shadow-sm">Update</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Floating Action Button -->
+        <button onclick="toggleModal(true)" class="fixed bottom-10 right-10 w-16 h-16 bg-[#4F46E5] hover:bg-[#312E81] text-white rounded-full shadow-2xl flex items-center justify-center transition-all hover:scale-110 fab-pulse z-40">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+        </button>
+
+        <!-- Notification Toast -->
+        <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-6 py-3 rounded-2xl text-sm font-medium shadow-2xl opacity-0 translate-y-10 transition-all pointer-events-none z-50 flex items-center gap-3">
+            <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <span id="toastMsg">Stock updated successfully!</span>
+        </div>
+
+        <!-- Add Product Modal -->
+        <div id="modal" class="fixed inset-0 modal-overlay flex items-center justify-center hidden z-[100] p-4">
+            <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in duration-300">
+                <div class="px-6 py-4 bg-slate-50 border-b flex items-center justify-between">
+                    <h3 class="font-bold text-[#312E81]">Add New Product</h3>
+                    <button onclick="toggleModal(false)" class="text-slate-400 hover:text-red-500 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Product Name</label>
+                        <input type="text" class="w-full px-4 py-2 border rounded-xl outline-none focus:border-indigo-500 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Unit Cost (Rs)</label>
+                        <input type="number" class="w-full px-4 py-2 border rounded-xl outline-none focus:border-indigo-500 text-sm">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Initial Stock</label>
+                            <input type="number" class="w-full px-4 py-2 border rounded-xl outline-none focus:border-indigo-500 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Category</label>
+                            <select class="w-full px-4 py-2 border rounded-xl outline-none focus:border-indigo-500 text-sm bg-white">
+                                <option>Furniture</option>
+                                <option>Electronics</option>
+                                <option>Stationary</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="showToast('New product added!')" class="w-full py-3 bg-[#4F46E5] hover:bg-[#312E81] text-white rounded-xl font-bold transition-all mt-4">Save Product</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Modal Logic
+        function toggleModal(show) {
+            const modal = document.getElementById('modal');
+            if (show) {
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        // Search Logic
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const term = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#stockTable tbody tr');
+            
+            rows.forEach(row => {
+                const productName = row.querySelector('td:first-child').textContent.toLowerCase();
+                if (productName.includes(term)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Toast Logic
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = msg;
+            
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0) translateX(-50%)';
+            
+            toggleModal(false);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(40px) translateX(-50%)';
+            }, 3000);
+        }
+
+        // Attach toast to all update buttons
+        document.querySelectorAll('.table-row button').forEach(btn => {
+            btn.addEventListener('click', () => showToast('Stock updated successfully!'));
+        });
+    </script>
+</body>
+</html>
