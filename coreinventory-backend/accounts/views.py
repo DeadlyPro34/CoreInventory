@@ -1,32 +1,40 @@
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-import json
+from django.contrib.auth import get_user_model
+from rest_framework import generics, permissions, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
-@csrf_exempt
-def login_view(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        username = data.get('username')
-        password = data.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return JsonResponse({'status': 'success', 'message': 'Logged in successfully'})
-        else:
-            return JsonResponse({'status': 'error', 'message': 'Invalid credentials'}, status=400)
-    return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
+from .serializers import RegisterSerializer, UserSerializer
 
-@csrf_exempt
-def signup_view(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        username = data.get('username')
-        password = data.get('password')
-        email = data.get('email')
-        if User.objects.filter(username=username).exists():
-            return JsonResponse({'status': 'error', 'message': 'Username already exists'}, status=400)
-        user = User.objects.create_user(username=username, password=password, email=email)
-        return JsonResponse({'status': 'success', 'message': 'Account created successfully'})
-    return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
+User = get_user_model()
+
+
+class RoleAwareTokenSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+        token["role"] = user.role
+        return token
+
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        data["user"] = UserSerializer(self.user).data
+        return data
+
+
+class LoginView(TokenObtainPairView):
+    serializer_class = RoleAwareTokenSerializer
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class ProfileView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        return Response(UserSerializer(request.user).data, status=status.HTTP_200_OK)
